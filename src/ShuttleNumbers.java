@@ -1,24 +1,29 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class ShuttleNumbers {
     public static void main(String[] args) {
-        List<Integer> shuttleNumbers = getShuttleNumbers();
-        shuttleNumbers.forEach(System.out::println);
+        printLuckySpaceshipNumbers();
     }
 
-    public static List<Integer> getShuttleNumbers() {
-        List<Integer> shuttleNumbers = new ArrayList<>();
-        for (int i = 1; i <= 100; i++) {
-            if (!isUnluckyNumber(i)) {
-                shuttleNumbers.add(i);
+    public static void printLuckySpaceshipNumbers() {
+        int count = 0;
+        int spaceshipNumber = 1;
+
+        while (count < 100) {
+            if (!isUnluckyNumber(spaceshipNumber)) {
+                System.out.println("Spaceship " + spaceshipNumber);
+                count++;
             }
+            spaceshipNumber++;
         }
-        return shuttleNumbers;
     }
 
-    private static boolean isUnluckyNumber(int number) {
-        String numberString = String.valueOf(number);
-        return numberString.contains("4") || numberString.contains("9");
+    public static boolean isUnluckyNumber(int number) {
+        while (number > 0) {
+            int digit = number % 10;
+            if (digit == 4 || digit == 9) {
+                return true;
+            }
+            number /= 10;
+        }
+        return false;
     }
 }
